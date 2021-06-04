@@ -11,7 +11,7 @@ npm install gam3pad
 ```
  
 ```js
-import { Gam3Pad } from 'gam3pad'
+import { Gam3pad } from 'gam3pad'
 
 const gamepad = new Gam3pad()
 
