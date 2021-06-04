@@ -1,0 +1,16 @@
+{
+  "name": "gam3pad",
+  "version": "0.0.1",
+  "description": "Easy and convenient way to use the Gamepad API",
+  "main": "./dist/main.js",
+  "scripts": {
+    "build": "webpack",
+    "build:watch": "webpack --watch"
+  },
+  "author": "Luke Mckeen",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0"
+  }
+}
