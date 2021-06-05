@@ -1,8 +1,10 @@
 import { findInput } from '../validate'
 
+let gamepad
+
 export function generateInput(names, index) {
   const gamepads = navigator.getGamepads()
-  const gamepad = gamepads[index]
+  gamepad = gamepads[index]
   const buttons = findInput(gamepad, names)
   
   const joysticks = {
@@ -13,5 +15,21 @@ export function generateInput(names, index) {
   return {
     buttons,
     joysticks
+  }
+}
+
+export function vibrate({delay = 0, duration = 500, weak = 0.5, strong = 0.5} = {}) {
+  const clampedDuration = Math.min(Math.max(duration, 1), 5000)
+  const clampedDelay = Math.min(Math.max(delay, 0), 4500)
+  const clampedStrong = Math.min(Math.max(strong, 0), 1)
+  const clampedWeak = Math.min(Math.max(weak, 0), 1)
+
+  if (gamepad.vibrationActuator) {
+    gamepad.vibrationActuator.playEffect("dual-rumble", {
+      startDelay: clampedDelay,
+      duration: clampedDuration,
+      weakMagnitude: clampedWeak,
+      strongMagnitude: clampedStrong,
+    })
   }
 }

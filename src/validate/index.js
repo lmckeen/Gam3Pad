@@ -3,7 +3,13 @@ import { supportedControllers } from '../config'
 export function findInput(gamepad, names) {
   return gamepad.buttons
     .map((button, index) => {
-      return {button, index, type: names[index]}
+      const buttonClone = {
+        pressed: button.pressed,
+        touched: button.touched,
+        value: button.value
+      }
+
+      return {button: buttonClone, index, type: names[index]}
     })  
 }
 

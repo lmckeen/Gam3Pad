@@ -1,7 +1,7 @@
 import { isNewButtonInput, isNewJoystickInput, getSupportedController, getActiveInput } from './validate'
 import { on, dispatchCallbacks } from './events'
 import { globalButtonConstants } from './config'
-import { generateInput } from './input'
+import { generateInput, vibrate } from './input'
 
 export class Gam3pad {
   #gamepadIndex
@@ -67,5 +67,6 @@ export class Gam3pad {
   }
 
   on = on
+  vibrate = vibrate
   static INPUT = globalButtonConstants
 }
