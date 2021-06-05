@@ -1,4 +1,4 @@
-import { isNewButtonInput, isNewJoystickInput, getSupportedController } from './validate'
+import { isNewButtonInput, isNewJoystickInput, getSupportedController, getActiveInput } from './validate'
 import { on, dispatchCallbacks } from './events'
 import { generateInput } from './input'
 
@@ -27,28 +27,39 @@ export class Gam3pad {
 
   #loop() {
     if (!this.#isConnected) return
-    
+
     const input = generateInput(this.#buttonNames, this.#gamepadIndex)
+    const activeInput = getActiveInput(input) 
 
     let hasUpdated = false
 
-    if (isNewButtonInput(input, this.#lastInput)) {
+    if (isNewButtonInput(activeInput, this.#lastInput)) {
+      const newButtonTypes = []
+
       hasUpdated = true
-      
-      input.buttons.forEach(button => {
+
+      activeInput.buttons.forEach(button => {       
         dispatchCallbacks(button.type, button)
+        newButtonTypes.push(button.type)
       })
+      
+      this.#lastInput.buttons
+        .forEach(data => {
+          if (!newButtonTypes.includes(data.type)) {
+            dispatchCallbacks(data.type, input.buttons[data.index])
+          }
+        })
     }
 
-    if (isNewJoystickInput(input, this.#lastInput)) {
+    if (isNewJoystickInput(activeInput, this.#lastInput)) {
       hasUpdated = true
 
-      dispatchCallbacks('joysticks', input.joysticks)
+      dispatchCallbacks('joysticks', activeInput.joysticks)
     }
 
     if (hasUpdated) {
-      this.#lastInput = input
-      dispatchCallbacks('input', input)
+      this.#lastInput = activeInput
+      dispatchCallbacks('input', activeInput)
     }
 
     window.requestAnimationFrame(this.#loop.bind(this))

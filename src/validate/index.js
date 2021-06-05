@@ -1,16 +1,22 @@
 import { supportedControllers } from '../config'
 
-export function findActiveButtons(gamepad, names) {
+export function findInput(gamepad, names) {
   return gamepad.buttons
     .map((button, index) => {
       return {button, index, type: names[index]}
     })  
-    .filter(obj => obj.button.pressed)
+}
+
+export function getActiveInput(input) {
+  return {
+    buttons: input.buttons.filter(obj => obj.button.pressed),
+    joysticks: input.joysticks
+  }
 }
 
 export function isNewButtonInput(input, lastInput) {
   if (input.buttons.length !== lastInput.buttons.length) return true
-  if (input.buttons.length === 0) return false
+  if (input.buttons.length === 0 && lastInput.buttons.length === 0) return false
   if (JSON.stringify(input.buttons) !== JSON.stringify(lastInput.buttons)) return true
   if (input.buttons.some((btn, index) => btn.button.value !== lastInput.buttons[index].button.value)) return true
 }
