@@ -25,12 +25,20 @@ gamepad.on(Gam3pad.INPUT.R1, data => {
 ## API Docs
 
 ```js
-//static property that contains of all of the possible types
+//Static property that contains of all of the possible types
 static INPUT: object
 
 //Listen for events and invoke the callback function 
 //when one happens based on the type provided
 on(type: string, cb: Function): void
+
+//Function that allows for vibration of the gamepad
+vibrate({
+  delay?: number, //Amount of time in ms to delay the vibrate by (min: 1, max: 5000)
+  duration?: number, //Amount of time in ms to vibrate the gamepad (min: 1, max: 5000)
+  weak?: number, //Amount of force to apply the weak vibrator with (min: 0, max: 1)
+  strong?: number //Amount of force to apply the strong vibrator with (min: 0, max: 1)
+}): void
 ```
 
 <br> 
