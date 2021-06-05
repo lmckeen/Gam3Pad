@@ -38,6 +38,7 @@ export const supportedControllers = {
     12: globalButtonConstants.UP,
     13: globalButtonConstants.DOWN,
     14: globalButtonConstants.LEFT,
-    15: globalButtonConstants.RIGHT
+    15: globalButtonConstants.RIGHT,
+    16: globalButtonConstants.HOME
   }
 }
