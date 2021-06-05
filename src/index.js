@@ -1,5 +1,6 @@
 import { isNewButtonInput, isNewJoystickInput, getSupportedController, getActiveInput } from './validate'
 import { on, dispatchCallbacks } from './events'
+import { globalButtonConstants } from './config'
 import { generateInput } from './input'
 
 export class Gam3pad {
@@ -54,16 +55,17 @@ export class Gam3pad {
     if (isNewJoystickInput(activeInput, this.#lastInput)) {
       hasUpdated = true
 
-      dispatchCallbacks('joysticks', activeInput.joysticks)
+      dispatchCallbacks(globalButtonConstants.JOYSTICKS, activeInput.joysticks)
     }
 
     if (hasUpdated) {
       this.#lastInput = activeInput
-      dispatchCallbacks('input', activeInput)
+      dispatchCallbacks(globalButtonConstants.ALL, activeInput)
     }
 
     window.requestAnimationFrame(this.#loop.bind(this))
   }
 
   on = on
+  static INPUT = globalButtonConstants
 }
