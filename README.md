@@ -15,7 +15,7 @@ import { Gam3pad } from 'gam3pad'
 
 const gamepad = new Gam3pad()
 
-gamepad.on(gamepad.INPUT.R1, data => {
+gamepad.on(Gam3pad.INPUT.R1, data => {
   console.log(data)
 })
 ```
