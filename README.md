@@ -33,6 +33,7 @@ static INPUT: object
 on(type: string, cb: Function): void
 
 //Function that allows for vibration of the gamepad
+//delay and duration combined must be less than 5000
 vibrate({
   delay?: number, //Amount of time in ms to delay the vibrate by (min: 1, max: 5000)
   duration?: number, //Amount of time in ms to vibrate the gamepad (min: 1, max: 5000)
