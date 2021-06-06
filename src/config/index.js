@@ -1,4 +1,4 @@
-export const globalButtonConstants = {
+export const globalGamepadConstants = {
   BUTTON_DOWN: 'button_down',
   BUTTON_RIGHT: 'button_right',
   BUTTON_LEFT: 'button_left',
@@ -23,22 +23,22 @@ export const globalButtonConstants = {
 
 export const supportedControllers = {
   standard: {
-    0: globalButtonConstants.BUTTON_DOWN,
-    1: globalButtonConstants.BUTTON_RIGHT,
-    2: globalButtonConstants.BUTTON_LEFT,
-    3: globalButtonConstants.BUTTON_UP,
-    4: globalButtonConstants.L1,
-    5: globalButtonConstants.R1,
-    6: globalButtonConstants.L2,
-    7: globalButtonConstants.R2,
-    8: globalButtonConstants.SELECT,
-    9: globalButtonConstants.START,
-    10: globalButtonConstants.L3,
-    11: globalButtonConstants.R3,
-    12: globalButtonConstants.UP,
-    13: globalButtonConstants.DOWN,
-    14: globalButtonConstants.LEFT,
-    15: globalButtonConstants.RIGHT,
-    16: globalButtonConstants.HOME
+    0: globalGamepadConstants.BUTTON_DOWN,
+    1: globalGamepadConstants.BUTTON_RIGHT,
+    2: globalGamepadConstants.BUTTON_LEFT,
+    3: globalGamepadConstants.BUTTON_UP,
+    4: globalGamepadConstants.L1,
+    5: globalGamepadConstants.R1,
+    6: globalGamepadConstants.L2,
+    7: globalGamepadConstants.R2,
+    8: globalGamepadConstants.SELECT,
+    9: globalGamepadConstants.START,
+    10: globalGamepadConstants.L3,
+    11: globalGamepadConstants.R3,
+    12: globalGamepadConstants.UP,
+    13: globalGamepadConstants.DOWN,
+    14: globalGamepadConstants.LEFT,
+    15: globalGamepadConstants.RIGHT,
+    16: globalGamepadConstants.HOME
   }
 }

@@ -1,6 +1,11 @@
-import { isNewButtonInput, isNewJoystickInput, getSupportedController, getActiveInput } from './validate'
+import {
+  isNewButtonInput,
+  isNewJoystickInput,
+  getSupportedController,
+  getActiveInput,
+} from './validate'
 import { on, dispatchCallbacks } from './events'
-import { globalButtonConstants } from './config'
+import { globalGamepadConstants } from './config'
 import { generateInput, vibrate } from './input'
 
 export class Gam3pad {
@@ -30,10 +35,10 @@ export class Gam3pad {
     if (!this.#isConnected) return
 
     const input = generateInput(this.#buttonNames, this.#gamepadIndex)
-    const activeInput = getActiveInput(input) 
-
+    const activeInput = getActiveInput(input)
+    
     let hasUpdated = false
-
+    
     if (isNewButtonInput(activeInput, this.#lastInput)) {
       const newButtonTypes = []
 
@@ -43,30 +48,36 @@ export class Gam3pad {
         dispatchCallbacks(button.type, button)
         newButtonTypes.push(button.type)
       })
-      
-      this.#lastInput.buttons
-        .forEach(data => {
-          if (!newButtonTypes.includes(data.type)) {
-            dispatchCallbacks(data.type, input.buttons[data.index])
-          }
-        })
+
+      this.#lastInput.buttons.forEach(data => {
+        if (!newButtonTypes.includes(data.type)) {
+          dispatchCallbacks(data.type, input.buttons[data.index])
+          dispatchCallbacks(globalGamepadConstants.ALL, { 
+            buttons: [input.buttons[data.index]], 
+            joysticks: input.joysticks
+          })
+        }
+      })
     }
 
     if (isNewJoystickInput(activeInput, this.#lastInput)) {
-      hasUpdated = true
-
-      dispatchCallbacks(globalButtonConstants.JOYSTICKS, activeInput.joysticks)
+      dispatchCallbacks(globalGamepadConstants.JOYSTICKS, activeInput.joysticks)
+      
+      if (!hasUpdated) {
+        dispatchCallbacks(globalGamepadConstants.ALL, activeInput)
+      } 
     }
 
-    if (hasUpdated) {
-      this.#lastInput = activeInput
-      dispatchCallbacks(globalButtonConstants.ALL, activeInput)
-    }
+    if (hasUpdated && activeInput.buttons.length > 0) {
+      dispatchCallbacks(globalGamepadConstants.ALL, activeInput)
+    } 
+
+    this.#lastInput = activeInput
 
     window.requestAnimationFrame(this.#loop.bind(this))
   }
 
   on = on
   vibrate = vibrate
-  static INPUT = globalButtonConstants
+  static INPUT = globalGamepadConstants
 }

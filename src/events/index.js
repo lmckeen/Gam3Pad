@@ -1,13 +1,13 @@
-import { globalButtonConstants } from '../config'
+import { globalGamepadConstants } from '../config'
 
 const callbacks = {}
 
 export function on(type, cb) {
-  if (type === globalButtonConstants.CONNECTED) {
+  if (type === globalGamepadConstants.CONNECTED) {
     window.addEventListener("gamepadconnected", cb)
   }
 
-  if (type === globalButtonConstants.DISCONNECTED) {
+  if (type === globalGamepadConstants.DISCONNECTED) {
     window.addEventListener("gamepaddisconnected", cb)
   }
 
@@ -16,7 +16,7 @@ export function on(type, cb) {
 }
 
 export function dispatchCallbacks(type, data) {
-  if (callbacks[type]) {
-    callbacks[type].forEach(cb => cb(data))
-  }
+  if (!callbacks[type]) return
+  
+  callbacks[type].forEach(cb => cb(data))
 }
