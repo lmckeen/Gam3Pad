@@ -9,6 +9,7 @@ export const globalGamepadConstants = {
   R2: 'r2',
   SELECT: 'select',
   START: 'start',
+  HOME: 'home',
   L3: 'l3',
   R3: 'r3',
   UP: 'up',
