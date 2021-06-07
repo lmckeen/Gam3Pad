@@ -15,7 +15,7 @@ export function findInput(gamepad, names) {
 
 export function getActiveInput(input) {
   return {
-    buttons: input.buttons.filter(obj => obj.button.pressed),
+    buttons: input.buttons.filter(obj => obj.button.pressed || obj.button.touched),
     joysticks: input.joysticks
   }
 }
