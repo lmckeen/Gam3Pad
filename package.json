@@ -1,10 +1,10 @@
 {
   "name": "gam3pad",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Easy and convenient way to use the Gamepad API",
   "main": "./src/index.js",
   "author": "Luke Mckeen",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.0"
